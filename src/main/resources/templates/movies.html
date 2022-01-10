@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sd="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{master.html}">
+<head>
+  <meta charset="utf-8">
+  <title>Movie</title>
+
+
+</head>
+<body >
+<div layout:fragment="content">
+  <h4 class="text-info mt-5 fs-2">Movie</h4>
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5" >
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="col mb-5" th:each="movie :${movies}" th:object="${movie}">
+          <div class="card h-100" >
+            <!-- Product image-->
+            <a th:href="@{/movie/{id}(id=*{id})}"  class="card shadow-lg" style="text-decoration:none;">
+              <img class="card-img-top"  th:src="@{/assets/{filename}(filename=*{coveredroute})}" th:alt="*{feature}"  />
+            </a>
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h2 class="card-title fs-6" th:text="*{feature}"></h2>
+                <p th:text="*{#temporals.format(premieredate,'dd/MM/yyyy')}" class="text-muted small"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ul class="pagination justify-content-center">
+    <div   class="row mt-5 " th:with="page=${movie}">
+      <div class="col-sm-6">
+        <div sd:pagination-sumary>
+        </div>
+        <div class="col-sm-6">
+          <nav>
+            <ul class="pagination"  sd:pagination="full"></ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sd="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{master.html}">
+<head>
+    <title>Admin movies</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div layout:fragment="content">
+
+<div class="container my-5" >
+    <h2>Movie</h2>
+    <div class = "text-end">
+        <a href="/admin/movie/new" class="btn btn-primary mb-3">Add movie</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>movie</th>
+            <th>F.Premiere</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "movie : ${movies}" th:object="${movie}"  >
+            <td style="width:150px;">
+                <a th:href="@{/assets/{filename}(filename=*{coveredroute})}" data-fancybox>
+                <img th:src="@{/assets/{filename}(filename=*{coveredroute})}"alt="" class="img-thumbnail w-100">
+                </a>
+            </td>
+            <td>
+                <div th:text="*{feature}" class="fs-5 fw-bold"></div>
+                <p th:text="*{synopsis}"></p>
+                <div>
+                    <span class="badge rounded-pill badge bg-info text-dark me-1"   th:each="gender:*{genders}" th:text="${gender.feature}">
+                    </span>
+                </div>
+            </td>
+            <td th:text="*{#temporals.format(premieredate,'dd/MM/yyyy')}"></td>
+            <td></td>
+            <td class="text-end">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a th:href="@{/admin/movie/edit/{id}(id=*{id})}"><button  type="submit"  class="btn btn-warning">Edit</button></a>
+                    &nbsp;
+                    <a th:href="@{/admin/movie/delete/{id}(id=*{id})} " ><button  type="submit" class="btn btn-danger">Delete</button></a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<ul class="pagination justify-content-center">
+    <div   class="row mt-5 " th:with="page=${movie}">
+        <div class="col-sm-6">
+            <div sd:pagination-sumary>
+            </div>
+            <div class="col-sm-6">
+                <nav>
+                    <ul class="pagination"  sd:pagination="full"></ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    </ul>
+</div>
+</div>
+</body>
+</html>

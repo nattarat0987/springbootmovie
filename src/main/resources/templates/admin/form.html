@@ -1,0 +1,85 @@
+<!doctype html>
+<html  xmlns:th="http//www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies Edit</title>
+</head>
+<body >
+<!--การลงทะเบียนภาพยนตร์-->
+<div layout:fragment="content">
+<div class="container my-5">
+    <h2>Movie Edit</h2>
+    <br>
+    <form action="" method="post" th:object="${movie}" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="feature" class="form-label">feature : </label>
+            <input type="text" id="feature" placeholder="Digite el titulo" class="form-control" th:field="*{feature}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('feature')}" th:errors="*{feature}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="synopsis" class="form-label">synopsis : </label>
+            <textarea id="synopsis" placeholder="Digite la synopsis" class="form-control" th:field="*{synopsis}"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('synopsis')}" th:errors="*{synopsis}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="premieredate" class="form-label">premieredate : </label>
+            <input type="date" id="premieredate" placeholder="Digite la fecha de estreno"
+                   class="form-control" th:field="*{premieredate}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('premieredate')}" th:errors="*{premieredate}">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="youtubetrailerId" class="form-label">Youtube Trailer ID :
+            </label> <input type="text" id="youtubetrailerId" placeholder="Digite el Youtube Trailer ID" class="form-control" th:field="*{youtubetrailerId}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('youtubetrailerId')}" th:errors="*{youtubetrailerId}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="frontpage" class="form-label">Frontpage : </label>
+            <input type="file" name="frontpage" id="frontpage" class="form-control" th:field="*{frontpage}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('frontpage')}" th:errors="*{frontpage}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="genders" class="form-label">genders : </label>
+            <select id="genders" class="form-control" th:field="*{genders}" multiple>
+            <option th:each="gender : ${genders}" th:value="${gender.id}" th:text="${gender.feature}"></option>
+        </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('genders')}" th:errors="*{genders}"></div>
+        </div>
+        <div class="text-end">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                save
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Want to fix it?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+server:
+    port: 443
+    ssl:
+        enabled: true
+        key-alias: chocolate
+        key-store: classpath:arm.p12
+        key-password: nattarat0987
+        key-store-password: nattarat0987
+        key-store-type: PKCS12
